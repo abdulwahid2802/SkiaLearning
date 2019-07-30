@@ -11,7 +11,7 @@ namespace SkiaLearning
         {
             InitializeComponent();
 
-            MainPage = new TapToggleFillPage();
+            MainPage = new OvalFillPage();
         }
 
         protected override void OnStart()
