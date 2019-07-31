@@ -11,7 +11,7 @@ namespace SkiaLearning
         {
             InitializeComponent();
 
-            MainPage = new ExpandingCirclePage();
+            MainPage = new FramedTextPage();
         }
 
         protected override void OnStart()
