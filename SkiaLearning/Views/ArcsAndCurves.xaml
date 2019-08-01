@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SkiaLearning.Views.ArcsAndCurves"
+    xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Slider x:Name="startSlider"
+                Maximum="360"
+                Minimum="1"
+                Value="90"
+                ValueChanged="OnSliderValueChanged"
+                Grid.Row="0"/>
+        <Label Text="{Binding Source={x:Reference startSlider}, Path=Value, StringFormat='Start Angle = {0:F1}'}"
+               HorizontalOptions="CenterAndExpand"
+               Grid.Row="1"/>
+
+        <Slider x:Name="sweepSlider"
+                Maximum="360"
+                Minimum="1"
+                Value="180"
+                ValueChanged="OnSliderValueChanged"
+                Grid.Row="2"/>
+        <Label Text="{Binding Source={x:Reference sweepSlider}, Path=Value, StringFormat='Sweep Angle = {0:F1}'}"
+               HorizontalOptions="CenterAndExpand"
+               Grid.Row="3"/>
+
+        <skia:SKCanvasView x:Name="canvasView"
+                           PaintSurface="OnCanvasViewPaintSurface"
+                           Grid.Row="4"/>
+
+    </Grid>
+    
+</ContentPage>

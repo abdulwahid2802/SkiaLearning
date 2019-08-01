@@ -11,7 +11,7 @@ namespace SkiaLearning
         {
             InitializeComponent();
 
-            MainPage = new FramedTextPage();
+            MainPage = new DonutChart();
         }
 
         protected override void OnStart()

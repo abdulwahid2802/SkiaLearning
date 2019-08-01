@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SkiaLearning.Views.DonutChart"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:local="clr-namespace:SkiaLearning.Tools">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="0,30,0,30"/> 
+    </ContentPage.Padding>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Slider x:Name="offsetSlider"
+                Maximum="100"
+                Minimum="10"
+                Value="50"
+                Grid.Row="0"
+                Margin="20,0,20,0"
+                IsEnabled="{Binding Source={x:Reference explodeSwitch}, Path=IsToggled}"
+                ValueChanged="OnSliderValueChanged"/>
+
+        <Label Text="{Binding Source={x:Reference offsetSlider}, Path=Value, StringFormat='Explode offset = {0:F1}'}"
+               FontAttributes="Bold"
+               FontSize="Large"
+               HorizontalOptions="CenterAndExpand"
+               Grid.Row="1">
+            <Label.TextColor>
+                <Binding Source="{x:Reference offsetSlider}"
+                         Path="IsEnabled">
+                    <Binding.Converter>
+                        <local:BoolToObjectConverter x:TypeArguments="Color"
+                                                     FalseObject="Gray"
+                                                     TrueObject="Black"/>
+                    </Binding.Converter>
+                </Binding>
+            </Label.TextColor>
+        </Label>
+
+        <skia:SKCanvasView x:Name="canvasView"
+                           PaintSurface="OnCanvasViewPaintSurface"
+                           Grid.Row="2"/>
+        <StackLayout Orientation="Horizontal"
+                     Grid.Row="3">
+
+            <Label HorizontalOptions="EndAndExpand"
+                   FontSize="Medium"
+                   VerticalOptions="Center"
+                   TextColor="#757575">
+                <Label.Text>
+                    <Binding Source="{x:Reference explodeSwitch}"
+                             Path="IsToggled">
+                        <Binding.Converter>
+                            <local:BoolToObjectConverter x:TypeArguments="x:String"
+                                                         FalseObject="Explode Disabled!"
+                                                         TrueObject="Explode Enabled!"/>
+                        </Binding.Converter>
+                    </Binding>
+                </Label.Text>
+            </Label>
+            <Switch x:Name="explodeSwitch"
+                    HorizontalOptions="StartAndExpand"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>
